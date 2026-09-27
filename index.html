@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlaucoFusion-XAI | Multimodal Explainable Intelligence for Glaucoma Screening</title>
+  <meta name="description"
+    content="GlaucoFusion-XAI: A Multimodal Explainable Intelligence Framework Combining Medical Imaging and Large Language Models for Automated Glaucoma Screening and Clinical Interpretation.">
+
+  <!-- CSS Design System -->
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="static/images/logo.svg">
+</head>
+
+<body>
+
+  <!-- ====================================================================
+       1. PUBLIC LANDING VIEW (#home)
+       ==================================================================== -->
+  <div id="view-home" class="app-view">
+    <!-- Public Nav -->
+    <header
+      style="background:var(--bg-secondary);border-bottom:1px solid var(--border-light);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="static/images/logo_dark.svg" alt="GlaucoFusion-XAI Logo" style="height:40px;">
+        <span class="badge badge-prototype"><span class="badge-dot"></span>STAGE 1 PROTOTYPE</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <button class="theme-toggle-btn" onclick="state.toggleTheme()" title="Toggle Theme">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="demoLoginAs('clinician')">
+          Demo Mode
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="navigateTo('login')">
+          Login
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="navigateTo('register')">
+          Register
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section style="padding:80px 24px 60px;max-width:1200px;margin:0 auto;text-align:center;">
+      <div
+        style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.3);border-radius:var(--radius-full);color:var(--cyan-400);font-size:0.85rem;font-weight:600;margin-bottom:20px;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        MULTIMODAL EXPLAINABLE INTELLIGENCE FRAMEWORK
+      </div>
+      <h1 style="font-size:3.2rem;font-weight:800;line-height:1.15;margin-bottom:20px;letter-spacing:-0.03em;">
+        See the Scan. <br>
+        <span
+          style="background:linear-gradient(135deg, #38bdf8, #2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+          Understand the AI.
+        </span>
+      </h1>
+      <p style="font-size:1.2rem;max-width:760px;margin:0 auto 36px;color:var(--slate-300);line-height:1.6;">
+        “Making AI-assisted glaucoma screening more transparent.”<br>
+        Combining deep retinal fundus imaging, explainable visual heatmaps (LIME & Grad-CAM), and Large Language Models
+        for automated screening and clear clinical interpretation.
+      </p>
+
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:48px;">
+        <button class="btn btn-primary btn-lg" onclick="demoLoginAs('clinician')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Launch Interactive Prototype
+        </button>
+        <button class="btn btn-secondary btn-lg" onclick="navigateTo('login')">
+          Clinician / Researcher Sign In
+        </button>
+      </div>
+
+      <!-- Feature Pill Badges -->
+      <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;color:var(--slate-400);font-size:0.9rem;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Deep VGG16 + ViT Representation
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          LIME & Grad-CAM Explainability
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          LLM Clinical Interpretation
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Local Interactive Prototype (No ML backend)
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Interactive Preview Card -->
+    <section style="max-width:1100px;margin:0 auto 70px;padding:0 24px;">
+      <div class="card"
+        style="padding:32px;border:1px solid var(--border-accent);background:linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-secondary) 100%);">
+        <div
+          style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h3 style="font-size:1.35rem;margin-bottom:4px;">GlaucoFusion-XAI End-to-End Workflow Architecture</h3>
+            <p style="font-size:0.875rem;color:var(--slate-400);">From raw fundus photography to explainable decision
+              boundaries and generative clinician consultation.</p>
+          </div>
+          <span class="badge badge-prototype">Research Demonstration</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;">
+          <!-- Feature 1 -->
+          <div
+            style="background:var(--bg-tertiary);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:22px;">
+            <div
+              style="width:42px;height:42px;border-radius:var(--radius-md);background:rgba(37,99,235,0.15);color:#3b82f6;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <h4 style="font-size:1.05rem;margin-bottom:8px;">1. Multimodal Synergy</h4>
+            <p style="font-size:0.875rem;color:var(--slate-300);">Integrates digital fundus images, Cup-to-Disc ratio
+              geometry, Intraocular Pressure (IOP), and patient symptoms into a cohesive representation.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            style="background:var(--bg-tertiary);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:22px;">
+            <div
+              style="width:42px;height:42px;border-radius:var(--radius-md);background:rgba(6,182,212,0.15);color:#06b6d4;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h4 style="font-size:1.05rem;margin-bottom:8px;">2. Explainable AI (XAI)</h4>
+            <p style="font-size:0.875rem;color:var(--slate-300);">Eliminates black-box diagnosis using LIME superpixel
+              segmentations and Grad-CAM activation heatmaps revealing neuroretinal rim thinning.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            style="background:var(--bg-tertiary);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:22px;">
+            <div
+              style="width:42px;height:42px;border-radius:var(--radius-md);background:rgba(16,185,129,0.15);color:#10b981;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+            </div>
+            <h4 style="font-size:1.05rem;margin-bottom:8px;">3. Clinical LLM Synthesis</h4>
+            <p style="font-size:0.875rem;color:var(--slate-300);">Generates transparent, structured medical summaries,
+              follow-up recommendations, and interactive consultation reports for clinical teams.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      style="text-align:center;padding:32px 20px;border-top:1px solid var(--border-light);color:var(--slate-500);font-size:0.85rem;">
+      <p><strong>GlaucoFusion-XAI Prototype</strong> • Academic & Research Final-Year Demonstration</p>
+      <p style="margin-top:4px;">Stage 1 Interactive UI Prototype • Not a certified medical diagnostic device.</p>
+    </footer>
+  </div>
+
+  <!-- ====================================================================
+       2. REGISTER PAGE (#register)
+       ==================================================================== -->
+  <div id="view-register" class="app-view" style="display:none;min-height:100vh;padding:40px 20px;">
+    <div style="max-width:520px;margin:0 auto;">
+      <!-- Logo Header -->
+      <div style="text-align:center;margin-bottom:30px;">
+        <a href="#home" onclick="navigateTo('home')">
+          <img src="static/images/logo_dark.svg" alt="GlaucoFusion-XAI Logo" style="height:44px;margin-bottom:12px;">
+        </a>
+        <h2 style="font-size:1.75rem;">Create Your Account</h2>
+        <p style="font-size:0.9rem;color:var(--slate-400);">Join the GlaucoFusion-XAI screening and research platform.
+        </p>
+      </div>
+
+      <!-- Registration Card -->
+      <div class="card" style="box-shadow:var(--shadow-lg);">
+        <form id="form-register">
+          <div class="form-group">
+            <label class="form-label" for="reg-fullname">Full Name <span class="required">*</span></label>
+            <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Dr. Alex Morgan" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Institutional / Academic Email <span
+                class="required">*</span></label>
+            <input type="email" id="reg-email" class="form-control" placeholder="name@institution.edu" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-role">Role <span class="required">*</span></label>
+            <select id="reg-role" class="form-control" required>
+              <option value="Clinician">Clinician (Ophthalmologist / Optometrist)</option>
+              <option value="Researcher">Researcher (Medical AI / Vision)</option>
+              <option value="Student">Student (Academic Project Evaluator)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password <span class="required">*</span></label>
+            <div class="input-group">
+              <input type="password" id="reg-password" class="form-control" placeholder="Create strong password"
+                required>
+              <button type="button" class="input-icon-btn" onclick="togglePasswordVisibility('reg-password', this)">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+            <!-- Strength Indicator -->
+            <div class="password-meter">
+              <div class="password-meter-bar">
+                <div id="password-meter-fill" class="password-meter-fill"></div>
+              </div>
+              <div class="password-meter-text">
+                <span>Password Strength</span>
+                <span id="password-meter-text-val">Enter password</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">Confirm Password <span
+                class="required">*</span></label>
+            <div class="input-group">
+              <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password"
+                required>
+              <button type="button" class="input-icon-btn"
+                onclick="togglePasswordVisibility('reg-confirm-password', this)">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="reg-terms" required>
+              <span>I agree to the <a href="javascript:void(0)">Ethical AI Screening Guidelines</a> and <a
+                  href="javascript:void(0)">Patient Data Governance Notice</a>.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">
+            Create Account
+          </button>
+        </form>
+
+        <div style="text-align:center;margin-top:20px;font-size:0.875rem;color:var(--slate-400);">
+          Already have an account? <a href="#login" onclick="navigateTo('login')">Sign in here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       3. LOGIN PAGE (#login)
+       ==================================================================== -->
+  <div id="view-login" class="app-view" style="display:none;min-height:100vh;padding:40px 20px;">
+    <div style="max-width:480px;margin:0 auto;">
+      <!-- Logo Header -->
+      <div style="text-align:center;margin-bottom:30px;">
+        <a href="#home" onclick="navigateTo('home')">
+          <img src="static/images/logo_dark.svg" alt="GlaucoFusion-XAI Logo" style="height:44px;margin-bottom:12px;">
+        </a>
+        <h2 style="font-size:1.75rem;">Welcome to GlaucoFusion-XAI</h2>
+        <p style="font-size:0.9rem;color:var(--slate-400);">Secure clinical screening and research access.</p>
+      </div>
+
+      <!-- Login Card -->
+      <div class="card" style="box-shadow:var(--shadow-lg);">
+        <!-- Demo Mode Quick Access Banner -->
+        <div
+          style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);border-radius:var(--radius-md);padding:14px;margin-bottom:20px;">
+          <div
+            style="font-weight:700;font-size:0.85rem;color:var(--cyan-300);margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            DEMO MODE INSTANT ACCESS
+          </div>
+          <p style="font-size:0.8rem;color:var(--slate-300);margin-bottom:10px;">Select a demo role to inspect the
+            complete prototype workflow:</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="demoLoginAs('clinician')">
+              Clinician
+            </button>
+            <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="demoLoginAs('researcher')">
+              Researcher
+            </button>
+            <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="demoLoginAs('student')">
+              Student
+            </button>
+          </div>
+        </div>
+
+        <form id="form-login">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" value="s.chen@ophthalmic-ai.org"
+              placeholder="name@institution.org" required>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <label class="form-label" for="login-password" style="margin-bottom:0;">Password</label>
+              <a href="javascript:void(0)"
+                onclick="showToast('Password reset link sent to demo registered email.', 'info', 'Forgot Password')"
+                style="font-size:0.8rem;">Forgot password?</a>
+            </div>
+            <div class="input-group">
+              <input type="password" id="login-password" class="form-control" value="DemoPassword2026!"
+                placeholder="Enter password" required>
+              <button type="button" class="input-icon-btn" onclick="togglePasswordVisibility('login-password', this)">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="login-remember" checked>
+              <span>Remember this workstation</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;">
+            Sign In to Platform
+          </button>
+        </form>
+
+        <div style="text-align:center;margin-top:20px;font-size:0.875rem;color:var(--slate-400);">
+          Don't have an account? <a href="#register" onclick="navigateTo('register')">Create one now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       4. CORE HEALTHCARE APP SHELL (Sidebar + Topbar + Dynamic Views)
+       ==================================================================== -->
+  <div class="app-container">
+    <!-- Collapsible Sidebar -->
+    <aside id="app-sidebar" class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#dashboard" onclick="navigateTo('dashboard')" class="sidebar-brand">
+          <img src="static/images/logo_dark.svg" alt="GlaucoFusion-XAI Logo">
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Screening & AI Hub</div>
+        <div class="nav-item active" data-view="dashboard" onclick="navigateTo('dashboard')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          Dashboard
+        </div>
+        <div class="nav-item" data-view="new-screening" onclick="navigateTo('new-screening')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          New Screening
+        </div>
+        <div class="nav-item" data-view="patients" onclick="navigateTo('patients')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          Patients
+        </div>
+        <div class="nav-item" data-view="history" onclick="navigateTo('history')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Screening History
+        </div>
+
+        <div class="nav-section-title">Explainability & Clinical</div>
+        <div class="nav-item" data-view="xai" onclick="navigateTo('xai')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          AI Explainability
+        </div>
+        <div class="nav-item" data-view="interpretation" onclick="navigateTo('interpretation')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Clinical Interpretation
+        </div>
+
+        <div class="nav-section-title">System & User</div>
+        <div class="nav-item" data-view="profile" onclick="navigateTo('profile')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          User Profile
+        </div>
+        <div class="nav-item" data-view="settings" onclick="navigateTo('settings')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Settings
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile" onclick="navigateTo('profile')">
+          <div class="user-avatar sync-user-avatar">SC</div>
+          <div class="user-info">
+            <div class="user-name sync-user-name">Dr. Sarah Chen</div>
+            <div class="user-role sync-user-role">Clinician</div>
+          </div>
+        </div>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          title="Logout" onclick="state.logout();navigateTo('login')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <main id="app-main" class="app-main">
+      <!-- Topbar -->
+      <header id="app-topbar" class="app-topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle menu">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div class="search-box">
+            <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="global-search-input" placeholder="Search Patient ID, Screening...">
+          </div>
+          <span class="badge badge-prototype" style="margin-left:8px;">
+            <span class="badge-dot"></span>STAGE 1 — PROTOTYPE
+          </span>
+        </div>
+
+        <div class="topbar-right">
+          <button class="theme-toggle-btn" onclick="state.toggleTheme()" title="Switch Light/Dark Theme">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+
+          <!-- Notification Bell -->
+          <div class="notification-wrapper">
+            <button class="theme-toggle-btn" onclick="openModal('modal-notifications')" title="Notifications">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span class="notification-badge"></span>
+            </button>
+          </div>
+
+          <!-- User profile chip -->
+          <div
+            style="display:flex;align-items:center;gap:10px;padding:4px 10px;background:var(--bg-tertiary);border-radius:var(--radius-full);cursor:pointer;"
+            onclick="navigateTo('profile')">
+            <div class="user-avatar sync-user-avatar" style="width:28px;height:28px;font-size:0.75rem;">SC</div>
+            <span class="sync-user-name" style="font-size:0.825rem;font-weight:600;color:var(--text-primary);">Dr. Sarah
+              Chen</span>
+          </div>
+
+          <button class="btn btn-secondary btn-sm" onclick="state.logout();navigateTo('login')">
+            Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Views Container -->
+      <div class="content-wrapper">
+
+        <!-- ==============================================================
+             VIEW: DASHBOARD
+             ============================================================== -->
+        <div id="view-dashboard" class="app-view">
+          <!-- Page Title -->
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">
+                Welcome to GlaucoFusion-XAI
+              </h2>
+              <p class="page-subtitle">AI-assisted retinal screening with transparent clinical insights.</p>
+            </div>
+            <div style="display:flex;gap:12px;">
+              <button class="btn btn-outline" onclick="openModal('modal-pipeline-info')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Project Architecture Info
+              </button>
+              <button class="btn btn-primary" onclick="navigateTo('new-screening')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Start New Screening
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Section -->
+          <div class="dashboard-hero">
+            <div class="hero-content">
+              <div class="hero-tagline">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                GLAUCOFUSION-XAI CLINICAL PLATFORM
+              </div>
+              <h2 class="hero-title">
+                “See the Scan. <br>
+                <span>Understand the AI.”</span>
+              </h2>
+              <p class="hero-description">
+                An interactive platform concept for explainable glaucoma screening using multimodal AI.
+                Integrates deep neural feature representations with LIME/Grad-CAM heatmaps and generative LLM clinical
+                reporting.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="navigateTo('new-screening')">
+                  Start New Screening
+                </button>
+                <button class="btn btn-secondary"
+                  onclick="document.getElementById('ai-pipeline-section').scrollIntoView({behavior:'smooth'})">
+                  Explore AI Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Metric Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+              <div>
+                <div id="stat-total-screenings" class="stat-value">1,428</div>
+                <div class="stat-label">Total Screenings (Synthetic)</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon cyan">
+                <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <div id="stat-images-uploaded" class="stat-value">1,894</div>
+                <div class="stat-label">Retinal Images Uploaded</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon amber">
+                <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <div id="stat-pending-reviews" class="stat-value">12</div>
+                <div class="stat-label">Pending Reviews</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon emerald">
+                <svg width="26" height="26" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <div class="stat-value" style="font-size:1.35rem;color:var(--emerald-400);">Pipeline Ready</div>
+                <div class="stat-label">Stage 1 Prototype State</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Signature AI Pipeline Visualization -->
+          <div id="ai-pipeline-section" class="pipeline-card">
+            <div class="pipeline-header">
+              <div>
+                <h3 style="font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:10px;">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Interactive Multimodal AI Screening Pipeline
+                </h3>
+                <p style="font-size:0.875rem;color:var(--slate-400);">Click on any stage below to inspect its
+                  algorithmic mechanics, neural architecture, and explainability layer.</p>
+              </div>
+              <span class="badge badge-prototype">Click Stage to Explore</span>
+            </div>
+
+            <!-- 7 Steps Nodes -->
+            <div id="pipeline-steps-list" class="pipeline-steps-container"></div>
+
+            <!-- Dynamic Explainer Box -->
+            <div id="pipeline-explainer-content" class="pipeline-explainer"></div>
+          </div>
+
+          <!-- Recent Screenings Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Recent Screening Sessions
+              </h3>
+              <a href="#history" onclick="navigateTo('history')" class="btn btn-outline btn-sm">View Full History</a>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Screening ID</th>
+                    <th>Patient</th>
+                    <th>Timestamp</th>
+                    <th>AI Status</th>
+                    <th>Clinician Review</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: NEW SCREENING (Multi-Step Workflow)
+             ============================================================== -->
+        <div id="view-new-screening" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">New Glaucoma Screening</h2>
+              <p class="page-subtitle">Multi-step interactive clinical screening intake.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="navigateTo('dashboard')">
+              Cancel & Return
+            </button>
+          </div>
+
+          <!-- Stepper Indicator -->
+          <div class="wizard-stepper">
+            <div class="wizard-progress-bar" id="wizard-progress-bar" style="width:0%;"></div>
+
+            <div class="wizard-step active" id="step-indicator-1">
+              <div class="wizard-step-circle">1</div>
+              <div class="wizard-step-label">Patient Information</div>
+            </div>
+
+            <div class="wizard-step" id="step-indicator-2">
+              <div class="wizard-step-circle">2</div>
+              <div class="wizard-step-label">Retinal Image Upload</div>
+            </div>
+
+            <div class="wizard-step" id="step-indicator-3">
+              <div class="wizard-step-circle">3</div>
+              <div class="wizard-step-label">Screening Review</div>
+            </div>
+          </div>
+
+          <!-- STEP 1: PATIENT INFORMATION -->
+          <div id="wizard-step-1" class="card" style="max-width:760px;margin:0 auto;">
+            <div class="card-header">
+              <h3 class="card-title">Step 1: Patient Clinical Demographics</h3>
+              <div style="display:flex;gap:8px;">
+                <button type="button" class="btn btn-outline btn-sm" onclick="autofillPatientDemo('pt1')">Demo Patient
+                  A</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="autofillPatientDemo('pt2')">Demo Patient
+                  B</button>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div class="form-group">
+                <label class="form-label" for="patient-id-input">Patient ID <span class="required">*</span></label>
+                <input type="text" id="patient-id-input" class="form-control" value="GF-PT-1042"
+                  placeholder="e.g. GF-PT-1042" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="patient-age-input">Age (Years) <span class="required">*</span></label>
+                <input type="number" id="patient-age-input" class="form-control" value="64" min="1" max="120" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="patient-gender-input">Biological Gender <span
+                  class="required">*</span></label>
+              <select id="patient-gender-input" class="form-control" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other / Unspecified</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="patient-notes-input">Clinical Notes & Intraocular Pressure (IOP)</label>
+              <textarea id="patient-notes-input" class="form-control" rows="4"
+                placeholder="Enter clinical observations, baseline IOP (mmHg), family history, or symptom complaints...">IOP measured 24 mmHg right eye. Patient notes occasional haloes around light. Optic cup appears excavated on baseline examination.</textarea>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+              <button class="btn btn-primary" onclick="submitStep1()">
+                Continue to Retinal Upload
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: UPLOAD RETINAL IMAGE -->
+          <div id="wizard-step-2" class="card" style="max-width:760px;margin:0 auto;display:none;">
+            <div class="card-header">
+              <h3 class="card-title">Step 2: Upload Retinal Fundus Photograph</h3>
+              <button class="btn btn-outline btn-sm" onclick="renderWizardStep(1)">Back</button>
+            </div>
+
+            <!-- Drag & Drop Zone -->
+            <div id="upload-dropzone" class="upload-dropzone">
+              <input type="file" id="retinal-file-input" class="file-input-hidden" accept=".jpg,.jpeg,.png,.svg">
+              <div class="upload-icon-wrapper">
+                <svg width="36" height="36" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <h4 class="upload-title">Upload Retinal Fundus Image</h4>
+              <p class="upload-subtitle">Drag & drop your ophthalmic scan here, or click to browse device</p>
+              <div style="font-size:0.8rem;color:var(--slate-400);margin-bottom:18px;">
+                Supported: <strong>JPG, JPEG, PNG, SVG</strong> • High resolution fundus photography
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm"
+                onclick="document.getElementById('retinal-file-input').click()">
+                Browse Local Files
+              </button>
+            </div>
+
+            <!-- Built-in Demo Retinal Scans Bar -->
+            <div class="sample-scans-bar">
+              <div style="font-size:0.85rem;color:var(--slate-300);font-weight:600;">
+                Or select a high-resolution demo scan:
+              </div>
+              <div class="sample-scans-options">
+                <div class="sample-chip" onclick="loadSampleFundus('normal')">
+                  <svg width="14" height="14" fill="#10b981" viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="8" />
+                  </svg>
+                  Sample 1: Normal Fundus (CDR 0.32)
+                </div>
+                <div class="sample-chip" onclick="loadSampleFundus('glaucoma')">
+                  <svg width="14" height="14" fill="#ef4444" viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="8" />
+                  </svg>
+                  Sample 2: Glaucoma Suspect (CDR 0.78)
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Preview Card -->
+            <div id="image-preview-card" class="image-preview-card" style="display:block;">
+              <div class="preview-media-container">
+                <img id="uploaded-fundus-preview" class="preview-image" src="static/images/fundus_sample_glaucoma.svg"
+                  alt="Uploaded Retinal Fundus">
+              </div>
+              <div class="preview-toolbar">
+                <div class="file-meta-info">
+                  <div class="file-meta-item">
+                    <span class="meta-label">File Name</span>
+                    <span id="meta-file-name" class="meta-value">sample_fundus_glaucoma_cdr078.svg</span>
+                  </div>
+                  <div class="file-meta-item">
+                    <span class="meta-label">File Size</span>
+                    <span id="meta-file-size" class="meta-value">162 KB</span>
+                  </div>
+                  <div class="file-meta-item">
+                    <span class="meta-label">Image Type</span>
+                    <span id="meta-file-type" class="meta-value">image/svg+xml</span>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-secondary btn-sm"
+                    onclick="document.getElementById('retinal-file-input').click()">
+                    Replace Image
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="removeUploadedImage()">
+                    Remove Image
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 Actions -->
+            <div style="display:flex;justify-content:space-between;margin-top:24px;">
+              <button class="btn btn-secondary" onclick="renderWizardStep(1)">
+                Back
+              </button>
+              <button id="btn-step2-continue" class="btn btn-primary" onclick="renderWizardStep(3)">
+                Continue to Review
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: SCREENING REVIEW -->
+          <div id="wizard-step-3" class="card" style="max-width:820px;margin:0 auto;display:none;">
+            <div class="card-header">
+              <h3 class="card-title">Step 3: Screening Review & Analysis Preparation</h3>
+              <span class="badge badge-success"><span class="badge-dot"></span>Ready for AI Analysis</span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+              <!-- Left: Image Preview -->
+              <div
+                style="background:#000;border-radius:var(--radius-lg);overflow:hidden;height:320px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-medium);">
+                <img id="review-image-preview" src="static/images/fundus_sample_glaucoma.svg"
+                  style="max-height:100%;max-width:100%;object-fit:contain;" alt="Review Retinal Fundus">
+              </div>
+
+              <!-- Right: Metadata & Clinical Summary -->
+              <div>
+                <div
+                  style="background:var(--bg-tertiary);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;">
+                  <h4 style="font-size:0.95rem;color:var(--cyan-300);margin-bottom:10px;">Patient Demographic
+                    Information</h4>
+                  <div style="font-size:0.875rem;display:flex;flex-direction:column;gap:6px;">
+                    <div><strong>Patient ID:</strong> <span id="review-patient-id"
+                        style="font-family:var(--font-mono);color:var(--text-primary);">GF-PT-1042</span></div>
+                    <div><strong>Age / Gender:</strong> <span id="review-age-gender">64 yrs / Female</span></div>
+                    <div><strong>Image File:</strong> <span id="review-file-name"
+                        style="font-family:var(--font-mono);">sample_fundus_glaucoma_cdr078.svg</span></div>
+                    <div><strong>File Specs:</strong> <span id="review-file-size">162 KB</span> (<span
+                        id="review-file-type">image/svg+xml</span>)</div>
+                  </div>
+                </div>
+
+                <div style="background:var(--bg-tertiary);border-radius:var(--radius-md);padding:16px;">
+                  <h4 style="font-size:0.95rem;color:var(--cyan-300);margin-bottom:6px;">Recorded Clinical Notes</h4>
+                  <p id="review-notes" style="font-size:0.85rem;color:var(--slate-300);line-height:1.5;">
+                    IOP measured 24 mmHg right eye. Optic cup appears excavated on baseline exam.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Disclaimer Banner -->
+            <div class="disclaimer-banner" style="margin-bottom:24px;">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <div>
+                <strong>Prototype Notice:</strong> Triggering this analysis activates the multimodal AI screening
+                simulation. Since the live deep learning model and LLM are reserved for Stage 3 development, no real
+                clinical diagnosis will be produced.
+              </div>
+            </div>
+
+            <!-- Step 3 Actions -->
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <button class="btn btn-secondary" onclick="renderWizardStep(2)">
+                Back to Edit
+              </button>
+              <button class="btn btn-primary btn-lg" onclick="startAiAnalysisSimulation()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Start Analysis (Prototype)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: AI ANALYSIS PREVIEW (Simulation Animation)
+             ============================================================== -->
+        <div id="view-analysis" class="app-view" style="display:none;">
+          <div class="simulation-container">
+            <div class="simulation-card">
+              <!-- Animated Radar Core -->
+              <div class="simulation-radar">
+                <div class="radar-circle"></div>
+                <div class="radar-circle"></div>
+                <div class="radar-circle"></div>
+                <div class="simulation-core-icon">
+                  <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+
+              <h2 id="sim-status-heading" style="font-size:1.6rem;font-weight:800;margin-bottom:8px;">
+                Executing AI Screening Pipeline...
+              </h2>
+              <p style="font-size:0.9rem;color:var(--slate-400);margin-bottom:24px;">
+                Processing multimodal fusion between retinal image tokens and patient metadata.
+              </p>
+
+              <!-- Progress Bar -->
+              <div
+                style="background:var(--bg-tertiary);height:8px;border-radius:var(--radius-full);overflow:hidden;margin-bottom:8px;">
+                <div id="sim-progress-fill"
+                  style="width:15%;height:100%;background:linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));transition:width 0.4s ease;">
+                </div>
+              </div>
+              <div
+                style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--slate-400);margin-bottom:28px;">
+                <span>Pipeline Simulation Progress</span>
+                <span id="sim-progress-percent" style="font-weight:700;color:var(--cyan-400);">15%</span>
+              </div>
+
+              <!-- Sequential Stage Rows -->
+              <div class="simulation-stages-list">
+                <div id="sim-stage-row-1" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">1</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">Retinal Image Normalization & Optical Check</span>
+                  </div>
+                  <span class="badge badge-neutral">Input</span>
+                </div>
+
+                <div id="sim-stage-row-2" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">2</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">CLAHE Contrast & Optic Disc Localization</span>
+                  </div>
+                  <span class="badge badge-neutral">Preprocessing</span>
+                </div>
+
+                <div id="sim-stage-row-3" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">3</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">Deep Feature Extraction (VGG16 / ViT-B16)</span>
+                  </div>
+                  <span class="badge badge-neutral">Vision Backbone</span>
+                </div>
+
+                <div id="sim-stage-row-4" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">4</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">Multimodal Cross-Attention Tensor Fusion</span>
+                  </div>
+                  <span class="badge badge-neutral">Multimodal</span>
+                </div>
+
+                <div id="sim-stage-row-5" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">5</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">LIME & Grad-CAM Explainable AI Saliency</span>
+                  </div>
+                  <span class="badge badge-neutral">XAI Engine</span>
+                </div>
+
+                <div id="sim-stage-row-6" class="simulation-stage-row">
+                  <div class="stage-name-wrap">
+                    <div class="stage-status-icon"><span style="font-size:0.75rem;color:var(--slate-500);">6</span>
+                    </div>
+                    <span style="font-size:0.9rem;font-weight:600;">Clinical Interpretation Synthesis Framework</span>
+                  </div>
+                  <span class="badge badge-neutral">LLM Synthesis</span>
+                </div>
+              </div>
+
+              <!-- Notice Badge -->
+              <div
+                style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius-md);padding:12px;font-size:0.825rem;color:#fde68a;margin-bottom:24px;">
+                <strong>Demo UI Notice:</strong> ML model integration and weights will be added in Stage 1 development.
+                No medical diagnosis or fake probability has been computed.
+              </div>
+
+              <!-- Complete Actions -->
+              <div id="sim-complete-actions" style="display:none;justify-content:center;gap:14px;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="navigateTo('xai')">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  View AI Explainability
+                </button>
+                <button class="btn btn-secondary" onclick="navigateTo('interpretation')">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  View Clinical Interpretation
+                </button>
+                <button class="btn btn-outline" onclick="navigateTo('dashboard')">
+                  Back to Dashboard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: AI EXPLAINABILITY (XAI Viewer)
+             ============================================================== -->
+        <div id="view-xai" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">
+                AI Explainability Workspace
+              </h2>
+              <p class="page-subtitle">Transparent model visualization, superpixel attribution, and activation mapping.
+              </p>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <button class="btn btn-secondary" onclick="navigateTo('interpretation')">
+                Go to Clinical Interpretation
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stage separation banner -->
+          <div class="disclaimer-banner" style="margin-bottom:24px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <strong>Explainability Visualization:</strong> Model-generated visual explanations will appear here after
+              ML integration. The interactive controls below demonstrate Grad-CAM, ViT Attention, and LIME overlays over
+              the uploaded fundus photograph.
+            </div>
+          </div>
+
+          <div class="xai-workspace">
+            <!-- Left: Viewport with Interactive Tabs & Blend Slider -->
+            <div class="xai-viewport-card">
+              <!-- Tabs -->
+              <div class="xai-tabs">
+                <button class="xai-tab active" data-tab="gradcam" onclick="switchXaiTab('gradcam')">
+                  Grad-CAM Heatmap
+                </button>
+                <button class="xai-tab" data-tab="attention" onclick="switchXaiTab('attention')">
+                  ViT Attention Map
+                </button>
+                <button class="xai-tab" data-tab="lime" onclick="switchXaiTab('lime')">
+                  LIME Superpixels
+                </button>
+              </div>
+
+              <!-- Canvas Viewport -->
+              <div class="xai-canvas-area">
+                <img id="xai-fundus-base" class="xai-base-img" src="static/images/fundus_sample_glaucoma.svg"
+                  alt="Base Retinal Fundus">
+                <img id="xai-overlay-layer" class="xai-overlay-layer" src="static/images/xai_gradcam_overlay.svg"
+                  alt="XAI Overlay" style="opacity:0.85;">
+              </div>
+
+              <!-- Controls Toolbar -->
+              <div class="xai-controls-bar">
+                <div class="slider-container">
+                  <span style="font-size:0.85rem;color:var(--slate-300);font-weight:600;">Overlay Blend:</span>
+                  <input type="range" id="xai-opacity-slider" min="0" max="100" value="85">
+                  <span id="xai-opacity-val"
+                    style="font-size:0.85rem;font-family:var(--font-mono);color:var(--cyan-400);min-width:40px;">85%</span>
+                </div>
+
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-secondary btn-sm"
+                    onclick="state.xaiOpacity=0.85;updateXaiView()">Reset</button>
+                  <button class="btn btn-outline btn-sm"
+                    onclick="showToast('XAI visual explanation bundle exported for case review.', 'info')">Export
+                    Image</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Clinical Evidence & Region Attribution Cards -->
+            <div class="xai-sidebar-cards">
+              <!-- Visual Evidence -->
+              <div class="evidence-card">
+                <div class="evidence-card-header">
+                  <span class="evidence-title">
+                    <svg width="18" height="18" fill="none" stroke="#38bdf8" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    Visual Evidence
+                  </span>
+                  <span class="badge badge-pending">Pending ML Integration</span>
+                </div>
+                <p style="font-size:0.85rem;color:var(--slate-300);line-height:1.5;margin-bottom:10px;">
+                  Analysis detects focal thinning of the inferior neuroretinal rim with vertical cup excavation.
+                </p>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:0.75rem;">
+                  <span class="badge badge-neutral">CDR: ~0.78 Suspect</span>
+                  <span class="badge badge-neutral">ISNT Rule: Inferior Rim Notch</span>
+                </div>
+              </div>
+
+              <!-- Feature Contribution -->
+              <div class="evidence-card">
+                <div class="evidence-card-header">
+                  <span class="evidence-title">
+                    <svg width="18" height="18" fill="none" stroke="#06b6d4" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    Feature Contribution
+                  </span>
+                  <span class="badge badge-pending">Pending ML Integration</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;font-size:0.825rem;">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+                      <span>Cup Excavation Extent</span>
+                      <span style="color:var(--cyan-400);font-weight:600;">+42% Influence</span>
+                    </div>
+                    <div style="background:var(--bg-tertiary);height:5px;border-radius:var(--radius-full);">
+                      <div style="width:42%;height:100%;background:var(--cyan-500);border-radius:var(--radius-full);">
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+                      <span>Inferior Rim Thinning Notch</span>
+                      <span style="color:var(--cyan-400);font-weight:600;">+38% Influence</span>
+                    </div>
+                    <div style="background:var(--bg-tertiary);height:5px;border-radius:var(--radius-full);">
+                      <div style="width:38%;height:100%;background:var(--cyan-500);border-radius:var(--radius-full);">
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+                      <span>Patient IOP (24 mmHg)</span>
+                      <span style="color:var(--cyan-400);font-weight:600;">+20% Multimodal</span>
+                    </div>
+                    <div style="background:var(--bg-tertiary);height:5px;border-radius:var(--radius-full);">
+                      <div style="width:20%;height:100%;background:var(--cyan-500);border-radius:var(--radius-full);">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Attention Regions -->
+              <div class="evidence-card">
+                <div class="evidence-card-header">
+                  <span class="evidence-title">
+                    <svg width="18" height="18" fill="none" stroke="#f59e0b" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Attention Regions
+                  </span>
+                  <span class="badge badge-pending">Pending ML Integration</span>
+                </div>
+                <ul style="padding-left:18px;font-size:0.825rem;color:var(--slate-300);line-height:1.6;">
+                  <li>Primary activation focused around nasal optic nerve head (ONH).</li>
+                  <li>Secondary gradient along superior-temporal vascular arcade.</li>
+                  <li>Peripapillary beta-zone crescent marked for specialist inspection.</li>
+                </ul>
+              </div>
+
+              <!-- Model Confidence -->
+              <div class="evidence-card">
+                <div class="evidence-card-header">
+                  <span class="evidence-title">
+                    <svg width="18" height="18" fill="none" stroke="#10b981" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Model Verification
+                  </span>
+                  <span class="badge badge-pending">Stage 3 Integration</span>
+                </div>
+                <p style="font-size:0.825rem;color:var(--slate-300);">
+                  Real model confidence score and calibration curve will be dynamically populated upon deployment of the
+                  trained VGG16/ViT weights.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: CLINICAL INTERPRETATION (LLM Panel)
+             ============================================================== -->
+        <div id="view-interpretation" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">Clinical Interpretation Preview</h2>
+              <p class="page-subtitle">Generative Large Language Model (LLM) diagnostic consultation and structured
+                synthesis.</p>
+            </div>
+            <div style="display:flex;gap:10px;">
+              <button class="btn btn-outline" onclick="openModal('modal-pdf-preview')">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Export PDF Report (Prototype)
+              </button>
+              <button class="btn btn-primary"
+                onclick="showToast('Case flagged for ophthalmology attending review.', 'success')">
+                Flag for Attending Review
+              </button>
+            </div>
+          </div>
+
+          <!-- Medical Disclaimer -->
+          <div class="disclaimer-banner" style="margin-bottom:24px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <strong>Prototype Interface for Research and Educational Demonstration:</strong> Not a medical diagnostic
+              tool. Clinical interpretations will be generated after LLM integration.
+            </div>
+          </div>
+
+          <div class="interpretation-layout">
+            <!-- Left: Case Summary & Multimodal Clinical Context -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Case Context & Multimodal Ingestion</h3>
+                <span class="badge badge-prototype">Synchronized</span>
+              </div>
+
+              <div
+                style="background:var(--bg-tertiary);border-radius:var(--radius-md);padding:18px;margin-bottom:20px;">
+                <h4 style="font-size:0.95rem;color:var(--cyan-300);margin-bottom:10px;">Patient Demographic Profile</h4>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.875rem;">
+                  <div><strong>Patient ID:</strong> <span
+                      style="font-family:var(--font-mono);color:var(--text-primary);">GF-PT-1042</span></div>
+                  <div><strong>Age & Gender:</strong> 64 Years / Female</div>
+                  <div><strong>Screening Session:</strong> GF-SCR-2026-0814</div>
+                  <div><strong>Recorded IOP:</strong> 24 mmHg (Elevated)</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom:20px;">
+                <h4 style="font-size:0.95rem;margin-bottom:8px;color:var(--slate-200);">Clinical Indications & Notes:
+                </h4>
+                <div
+                  style="background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:14px;font-size:0.875rem;line-height:1.6;color:var(--slate-300);">
+                  Patient reports subtle night glare and intermittent headaches. Positive family history for open-angle
+                  glaucoma (mother). Tonometer measurement shows intraocular pressure of 24 mmHg in the right eye (OD).
+                </div>
+              </div>
+
+              <div>
+                <h4 style="font-size:0.95rem;margin-bottom:8px;color:var(--slate-200);">Visual Evidence Summary:</h4>
+                <ul style="padding-left:20px;font-size:0.875rem;color:var(--slate-300);line-height:1.6;">
+                  <li>Vertical Cup-to-Disc ratio estimated at ~0.78 (normal upper bound ~0.40).</li>
+                  <li>Inferior neuroretinal rim thinning violates the physiological ISNT rule.</li>
+                  <li>LIME superpixel attribution highlights lamina cribrosa excavation.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Right: Generative LLM Interpretation Workspace -->
+            <div class="llm-panel">
+              <div class="llm-badge-header">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div
+                    style="width:32px;height:32px;border-radius:50%;background:rgba(6,182,212,0.15);color:var(--cyan-400);display:flex;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 style="font-size:1.05rem;font-weight:700;">Clinical LLM Synthesis Engine</h4>
+                    <span style="font-size:0.75rem;color:var(--slate-400);">GlaucoFusion Generative Interpretation
+                      Agent</span>
+                  </div>
+                </div>
+                <span class="badge badge-pending">Pending LLM Integration</span>
+              </div>
+
+              <!-- Output Text Area with Realistic Clinical Formatting -->
+              <div class="llm-output-text">
+                <div
+                  style="background:rgba(6,182,212,0.06);border-left:3px solid var(--accent-primary);padding:12px 14px;border-radius:var(--radius-sm);margin-bottom:16px;">
+                  <em>“Clinical interpretation will be generated after LLM integration. The following represents the
+                    structured clinical format designed for this platform.”</em>
+                </div>
+
+                <h4>1. Executive Clinical Summary</h4>
+                <p>
+                  Multimodal data synthesis combines fundus photography findings with clinical IOP data (24 mmHg).
+                  Visual feature extraction identifies significant optic cup excavation with inferior-temporal
+                  neuroretinal rim thinning.
+                </p>
+
+                <h4>2. Explainability Correlation</h4>
+                <p>
+                  LIME and Grad-CAM activations consistently localize to the inferior disc margin, corroborating
+                  morphological rim notch patterns associated with early to moderate glaucomatous neuropathy.
+                </p>
+
+                <h4>3. Recommended Next Clinical Steps</h4>
+                <ul>
+                  <li><strong>Optical Coherence Tomography (OCT):</strong> Order RNFL thickness and ganglion cell
+                    complex (GCC) mapping to confirm structural nerve loss.</li>
+                  <li><strong>Automated Visual Field:</strong> Perform Humphrey 24-2 or 30-2 perimetry to assess
+                    functional visual field defects.</li>
+                  <li><strong>IOP Diurnal Curve:</strong> Serial applanation tonometry to evaluate pressure
+                    fluctuations.</li>
+                </ul>
+              </div>
+
+              <!-- Simulated Conversational Prompt -->
+              <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border-light);">
+                <div style="display:flex;gap:10px;">
+                  <input type="text" class="form-control"
+                    placeholder="Ask LLM: 'Explain why the inferior rim thinning was flagged'..."
+                    style="font-size:0.85rem;">
+                  <button class="btn btn-secondary btn-sm"
+                    onclick="showToast('Interactive conversational consultation will be active in Stage 3 LLM deployment.', 'info')">
+                    Inquire
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: SCREENING HISTORY
+             ============================================================== -->
+        <div id="view-history" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">Screening History</h2>
+              <p class="page-subtitle">Search, filter, and review historical retinal screening sessions.</p>
+            </div>
+            <button class="btn btn-primary" onclick="navigateTo('new-screening')">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+              New Screening
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="table-toolbar">
+              <div class="table-filters">
+                <input type="text" id="history-search-input" class="form-control" style="width:260px;"
+                  placeholder="Search Patient ID, Session ID..." oninput="filterHistoryTable()">
+                <select id="history-status-select" class="form-control" style="width:190px;"
+                  onchange="filterHistoryTable()">
+                  <option value="all">All Statuses</option>
+                  <option value="completed">Completed (Prototype)</option>
+                  <option value="review">Under Clinician Review</option>
+                </select>
+              </div>
+
+              <div style="font-size:0.85rem;color:var(--slate-400);">
+                Interactive Demo Records
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Screening ID</th>
+                    <th>Patient Demographics</th>
+                    <th>Date & Time</th>
+                    <th>Fundus Scan</th>
+                    <th>AI Analysis Status</th>
+                    <th>Review Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: PATIENTS
+             ============================================================== -->
+        <div id="view-patients" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">Patient Management</h2>
+              <p class="page-subtitle">Directory of screened patient profiles and longitudinal tracking.</p>
+            </div>
+            <button class="btn btn-secondary"
+              onclick="showToast('New patient registration modal opened in demo mode.', 'info')">
+              Add New Patient
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="table-toolbar">
+              <div class="table-filters">
+                <input type="text" id="patient-search-input" class="form-control" style="width:260px;"
+                  placeholder="Search Patient ID, Name..." oninput="filterPatientsTable()">
+              </div>
+              <span class="badge badge-prototype">Synthetic Patient Data Only</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Patient ID</th>
+                    <th>Full Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Total Screenings</th>
+                    <th>Last Screening</th>
+                    <th>Clinical Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="patients-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: USER PROFILE
+             ============================================================== -->
+        <div id="view-profile" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">User Profile</h2>
+              <p class="page-subtitle">Manage institutional credentials, roles, and project author information.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openModal('modal-edit-profile')">
+              Edit Profile
+            </button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;">
+            <!-- Profile Card -->
+            <div class="card" style="text-align:center;">
+              <div class="user-avatar sync-user-avatar"
+                style="width:84px;height:84px;font-size:2rem;margin:0 auto 16px;">
+                SC
+              </div>
+              <h3 class="sync-user-name" style="font-size:1.35rem;margin-bottom:4px;">Dr. Sarah Chen, MD</h3>
+              <p class="sync-user-role badge badge-prototype" style="margin-bottom:16px;">Clinician</p>
+              <p class="sync-user-email" style="font-size:0.875rem;color:var(--slate-400);margin-bottom:24px;">
+                s.chen@ophthalmic-ai.org</p>
+
+              <div
+                style="text-align:left;border-top:1px solid var(--border-light);padding-top:16px;font-size:0.85rem;display:flex;flex-direction:column;gap:8px;">
+                <div><strong>Account Created:</strong> January 2026</div>
+                <div><strong>Platform Role:</strong> Lead Clinical Evaluator</div>
+                <div><strong>Security Status:</strong> Two-Factor Authenticated</div>
+              </div>
+            </div>
+
+            <!-- Profile Details & Project Credits -->
+            <div style="display:flex;flex-direction:column;gap:24px;">
+              <div class="card">
+                <h3 class="card-title" style="margin-bottom:16px;">Platform Profile Completion</h3>
+                <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+                  <div
+                    style="flex:1;background:var(--bg-tertiary);height:8px;border-radius:var(--radius-full);overflow:hidden;">
+                    <div
+                      style="width:85%;height:100%;background:linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));">
+                    </div>
+                  </div>
+                  <span style="font-weight:700;color:var(--cyan-400);font-size:0.9rem;">85%</span>
+                </div>
+                <p style="font-size:0.825rem;color:var(--slate-400);">Clinical verification credentials active for Stage
+                  2 prototype evaluation.</p>
+              </div>
+
+              <div class="card">
+                <h3 class="card-title" style="margin-bottom:16px;">Project & Academic Affiliation</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:0.875rem;">
+                  <div style="background:var(--bg-tertiary);padding:14px;border-radius:var(--radius-md);">
+                    <div style="font-size:0.75rem;color:var(--slate-400);text-transform:uppercase;">Project Title</div>
+                    <div style="font-weight:700;margin-top:2px;">GlaucoFusion-XAI</div>
+                  </div>
+                  <div style="background:var(--bg-tertiary);padding:14px;border-radius:var(--radius-md);">
+                    <div style="font-size:0.75rem;color:var(--slate-400);text-transform:uppercase;">Development Stage
+                    </div>
+                    <div style="font-weight:700;margin-top:2px;color:var(--cyan-300);">Stage 2: Interactive UI Prototype
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top:20px;display:flex;gap:12px;">
+                  <button class="btn btn-secondary" onclick="openModal('modal-edit-profile')">Edit Personal
+                    Details</button>
+                  <button class="btn btn-outline"
+                    onclick="showToast('Password change verification code dispatched.', 'info')">Change
+                    Password</button>
+                  <button class="btn btn-danger" onclick="state.logout();navigateTo('login')">Logout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             VIEW: SETTINGS
+             ============================================================== -->
+        <div id="view-settings" class="app-view" style="display:none;">
+          <div class="page-header">
+            <div>
+              <h2 class="page-title">Platform Settings</h2>
+              <p class="page-subtitle">Configure application appearance, notification dispatch, and data governance.</p>
+            </div>
+            <button class="btn btn-primary"
+              onclick="showToast('Settings successfully persisted to local storage.', 'success')">
+              Save Settings
+            </button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:24px;">
+            <!-- Appearance -->
+            <div class="card">
+              <h3 class="card-title" style="margin-bottom:16px;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                Appearance & Theme
+              </h3>
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">Interface Color Scheme</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Switch between Clinical Light and Modern Dark
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="state.toggleTheme()">
+                    Toggle Theme
+                  </button>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">High Contrast Heatmap Mode</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Enhances LIME and Grad-CAM color visibility
+                    </div>
+                  </div>
+                  <input type="checkbox" style="width:20px;height:20px;accent-color:var(--accent-primary);"
+                    onchange="toggleSetting('highContrast')" checked>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card">
+              <h3 class="card-title" style="margin-bottom:16px;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                Notification Preferences
+              </h3>
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">Analysis Completion Alerts</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Notify when AI screening pipeline finishes
+                    </div>
+                  </div>
+                  <input type="checkbox" style="width:20px;height:20px;accent-color:var(--accent-primary);"
+                    onchange="toggleSetting('pipelineNotify')" checked>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">Email Summary Reports</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Dispatch screening report copies via email
+                    </div>
+                  </div>
+                  <input type="checkbox" style="width:20px;height:20px;accent-color:var(--accent-primary);"
+                    onchange="toggleSetting('emailAlerts')" checked>
+                </div>
+              </div>
+            </div>
+
+            <!-- Privacy & Governance -->
+            <div class="card">
+              <h3 class="card-title" style="margin-bottom:16px;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Privacy & Data Governance
+              </h3>
+              <div style="display:flex;flex-direction:column;gap:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">Local Anonymization Mode</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Mask patient names and display synthetic
+                      tokens</div>
+                  </div>
+                  <input type="checkbox" style="width:20px;height:20px;accent-color:var(--accent-primary);"
+                    onchange="toggleSetting('anonymizeData')" checked>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div>
+                    <div style="font-weight:600;font-size:0.9rem;">Demo Mode Guardrails</div>
+                    <div style="font-size:0.8rem;color:var(--slate-400);">Block accidental external server transmission
+                    </div>
+                  </div>
+                  <input type="checkbox" style="width:20px;height:20px;accent-color:var(--accent-primary);"
+                    onchange="toggleSetting('demoMode')" checked>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ====================================================================
+       MODALS
+       ==================================================================== -->
+
+  <!-- Modal: Screening Details -->
+  <div id="modal-screening-detail" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">Screening Case Record</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-screening-detail')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="modal-screening-detail-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-screening-detail')">Close</button>
+        <button class="btn btn-primary" onclick="closeModal('modal-screening-detail');navigateTo('xai')">Open XAI
+          Heatmap</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Patient Details -->
+  <div id="modal-patient-detail" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">Patient Profile Information</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-patient-detail')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="modal-patient-detail-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-patient-detail')">Close</button>
+        <button class="btn btn-primary" onclick="closeModal('modal-patient-detail');navigateTo('new-screening')">New
+          Screening for Patient</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Profile -->
+  <div id="modal-edit-profile" class="modal-backdrop">
+    <div class="modal-card" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">Edit User Profile</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-edit-profile')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="edit-profile-name">Full Name</label>
+          <input type="text" id="edit-profile-name" class="form-control" value="Dr. Sarah Chen, MD">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-profile-role">Primary Role</label>
+          <select id="edit-profile-role" class="form-control">
+            <option value="Clinician">Clinician (Ophthalmologist / Optometrist)</option>
+            <option value="Researcher">Researcher (AI / Vision Lab)</option>
+            <option value="Student">Student (Academic Evaluator)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-profile-institution">Affiliation / Department</label>
+          <input type="text" id="edit-profile-institution" class="form-control"
+            value="Glaucoma Screening & Clinical Research Institute">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-edit-profile')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProfileEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: PDF Medical Report Prototype Preview -->
+  <div id="modal-pdf-preview" class="modal-backdrop">
+    <div class="modal-card" style="max-width:680px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">Standardized Clinical PDF Report (Prototype)</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-pdf-preview')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body"
+        style="background:#ffffff;color:#1e293b;border-radius:var(--radius-md);padding:24px;font-family:serif;">
+        <div
+          style="border-bottom:2px solid #0284c7;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h2 style="color:#0f172a;font-size:1.4rem;margin:0;">GLAUCOFUSION-XAI CLINICAL REPORT</h2>
+            <div style="font-size:0.8rem;color:#64748b;">Multimodal Explainable Glaucoma Screening Framework</div>
+          </div>
+          <div style="font-size:0.75rem;text-align:right;color:#64748b;">
+            Date: 2026-09-24<br>Report ID: GF-REP-8812
+          </div>
+        </div>
+
+        <div style="font-size:0.85rem;line-height:1.6;margin-bottom:16px;">
+          <strong>Patient ID:</strong> GF-PT-1042 &nbsp;|&nbsp; <strong>Age:</strong> 64 &nbsp;|&nbsp;
+          <strong>Gender:</strong> Female<br>
+          <strong>Measured IOP:</strong> 24 mmHg (OD) &nbsp;|&nbsp; <strong>Attending Clinician:</strong> Dr. Sarah
+          Chen, MD
+        </div>
+
+        <div style="display:flex;gap:16px;margin-bottom:16px;">
+          <div
+            style="width:160px;height:160px;background:#000;border:1px solid #cbd5e1;display:flex;align-items:center;justify-content:center;">
+            <img src="static/images/fundus_sample_glaucoma.svg" style="max-height:100%;max-width:100%;" alt="Fundus">
+          </div>
+          <div
+            style="width:160px;height:160px;background:#000;border:1px solid #cbd5e1;display:flex;align-items:center;justify-content:center;">
+            <img src="static/images/xai_gradcam_overlay.svg" style="max-height:100%;max-width:100%;" alt="GradCAM">
+          </div>
+        </div>
+
+        <div style="font-size:0.8rem;color:#475569;border-top:1px dashed #cbd5e1;padding-top:10px;">
+          <strong>Generative Clinical Synthesis:</strong> Multimodal analysis identified optic cup excavation and
+          inferior rim thinning consistent with suspect glaucomatous neuropathy. Recommended follow-up: Humphrey 24-2
+          perimetry and optical coherence tomography.
+        </div>
+
+        <div style="margin-top:14px;font-size:0.7rem;color:#94a3b8;font-style:italic;">
+          Disclaimer: Report generated for academic research prototype demonstration. ReportLab automated PDF
+          compilation planned for Stage 2.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-pdf-preview')">Close</button>
+        <button class="btn btn-primary"
+          onclick="showToast('Simulated medical PDF report downloaded to device.', 'success');closeModal('modal-pdf-preview')">Download
+          PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Notifications -->
+  <div id="modal-notifications" class="modal-backdrop">
+    <div class="modal-card" style="max-width:440px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">Platform Notifications</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-notifications')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:12px;">
+        <div
+          style="padding:12px;background:var(--bg-tertiary);border-radius:var(--radius-md);border-left:3px solid var(--accent-primary);">
+          <div style="font-weight:600;font-size:0.875rem;">Stage 1 Prototype Active</div>
+          <div style="font-size:0.8rem;color:var(--slate-400);">All client-side workflows, image uploading, and XAI
+            interactions are fully operational.</div>
+        </div>
+        <div
+          style="padding:12px;background:var(--bg-tertiary);border-radius:var(--radius-md);border-left:3px solid #10b981;">
+          <div style="font-weight:600;font-size:0.875rem;">Sample Fundus Assets Loaded</div>
+          <div style="font-size:0.8rem;color:var(--slate-400);">Pre-loaded normal and glaucoma suspect fundus scans
+            ready for 1-click evaluation.</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('modal-notifications')">Dismiss All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Project Architecture Information -->
+  <div id="modal-pipeline-info" class="modal-backdrop">
+    <div class="modal-card" style="max-width:680px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.15rem;font-weight:700;">GlaucoFusion-XAI Project Information</h3>
+        <button class="btn-icon" style="background:transparent;border:none;color:var(--slate-400);cursor:pointer;"
+          onclick="closeModal('modal-pipeline-info')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" style="font-size:0.875rem;line-height:1.6;color:var(--slate-300);">
+        <h4 style="color:var(--cyan-300);margin-bottom:6px;">Abstract Overview</h4>
+        <p style="margin-bottom:14px;">
+          Glaucoma is an ophthalmic condition characterized by progressive optic nerve damage, often correlated with
+          elevated intraocular pressure. Conventional screening relies heavily on manual, subjective fundus photograph
+          interpretation. GlaucoFusion-XAI introduces an explainable multimodal framework combining deep CNNs (VGG16
+          transfer learning) and Vision Transformers with LIME/Grad-CAM interpretability and generative LLM clinical
+          summaries.
+        </p>
+        <h4 style="color:var(--cyan-300);margin-bottom:6px;">Current Project Scope: Stage 1 Prototype</h4>
+        <p style="margin-bottom:14px;">
+          This interactive interface demonstrates the complete clinical workflow: registration, authentication, patient
+          data ingestion, retinal upload and inspection, AI processing simulation, XAI heatmap exploration, and clinical
+          interpretation reporting with zero backend or fake medical values.
+        </p>
+        <div style="background:var(--bg-tertiary);border-radius:var(--radius-md);padding:14px;">
+          <strong>Authors & Academic Context:</strong> Final-Year Project • Computer Science & Engineering
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeModal('modal-pipeline-info')">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Engine -->
+  <script src="static/js/app.js"></script>
+</body>
+
+</html>
